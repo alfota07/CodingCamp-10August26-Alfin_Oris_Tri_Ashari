@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodingCamp-10August26-Alfin_Oris_Tri_Ashari</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Theme Toggle (New Design) -->
+    <div class="theme-toggle-container">
+        <button id="themeToggle" class="theme-toggle-switch" title="Toggle Theme">
+            <span class="theme-label">Day Mode</span>
+            <span class="theme-icon-circle">☀️</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- Greeting Section (Full Width) -->
+        <section class="greeting-section">
+            <div class="greeting-header">
+                <button id="greetingSettingsBtn" class="greeting-settings-btn" title="Edit Name">⚙️</button>
+            </div>
+            
+            <!-- Name Settings Dropdown -->
+            <div id="greetingSettings" class="greeting-settings-panel">
+                <label for="userName">Your Name:</label>
+                <div class="greeting-setting-controls">
+                    <input type="text" id="userName" placeholder="Enter your name" />
+                    <button id="saveNameBtn" class="btn-small btn-primary">Save</button>
+                </div>
+            </div>
+            
+            <div id="datetime">
+                <p id="time">00:00:00</p>
+                <p id="date">Loading...</p>
+            </div>
+            <h1 id="greeting">Good Morning</h1>
+        </section>
+
+        <!-- Two Column Layout -->
+        <div class="two-column-layout">
+            <!-- Left Column: Focus Timer -->
+            <section class="timer-section">
+                <div class="timer-header">
+                    <h2>Focus Timer</h2>
+                    <button id="timerSettingsBtn" class="timer-settings-btn" title="Change Timer Duration">⚙️</button>
+                </div>
+                
+                <!-- Timer Settings Dropdown -->
+                <div id="timerSettings" class="timer-settings-panel">
+                    <label for="pomodoroTime">Duration (min):</label>
+                    <div class="timer-setting-controls">
+                        <input type="number" id="pomodoroTime" min="1" max="60" value="25" />
+                        <button id="saveTimeBtn" class="btn-small btn-primary">Save</button>
+                    </div>
+                </div>
+                
+                <div class="timer-display">
+                    <span id="timer">25:00</span>
+                </div>
+                <div class="timer-controls">
+                    <button id="startBtn" class="btn btn-primary">Start</button>
+                    <button id="stopBtn" class="btn btn-secondary">Stop</button>
+                    <button id="resetBtn" class="btn btn-secondary">Reset</button>
+                </div>
+            </section>
+
+            <!-- Right Column: To-Do List -->
+            <section class="todo-section">
+                <div class="section-header">
+                    <h2>Tasks</h2>
+                    <select id="sortTasks" class="sort-select">
+                        <option value="date">Sort by Date</option>
+                        <option value="name">Sort by Name</option>
+                        <option value="status">Sort by Status</option>
+                    </select>
+                </div>
+                <div class="todo-input-container">
+                    <input type="text" id="todoInput" placeholder="Add a new task..." />
+                    <button id="addTodoBtn" class="btn btn-primary">Add</button>
+                </div>
+                <ul id="todoList"></ul>
+            </section>
+        </div>
+
+        <!-- Quick Links Section (Full Width) -->
+        <section class="links-section">
+            <h2>Quick Links</h2>
+            <div class="links-input-container">
+                <input type="text" id="linkName" placeholder="Link name" class="link-input" />
+                <input type="url" id="linkUrl" placeholder="URL" class="link-input" />
+                <button id="addLinkBtn" class="btn btn-primary btn-add-link">Add Link</button>
+            </div>
+            <div id="linksList" class="links-container"></div>
+        </section>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
