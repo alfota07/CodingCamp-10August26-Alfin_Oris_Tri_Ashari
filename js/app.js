@@ -195,6 +195,13 @@ function loadTodos() {
     const savedTodos = localStorage.getItem('todos');
     if (savedTodos) {
         todos = JSON.parse(savedTodos);
+        // Ensure old todos have createdAt timestamp
+        todos = todos.map(todo => {
+            if (!todo.createdAt) {
+                todo.createdAt = Date.now() - (Math.random() * 86400000); // Random time in last 24h
+            }
+            return todo;
+        });
     }
     renderTodos();
 }
@@ -218,7 +225,8 @@ function sortTodos() {
             break;
         case 'date':
         default:
-            // Keep original order (by creation date)
+            // Sort by creation date (newest first)
+            todos.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
             break;
     }
 }
@@ -248,10 +256,20 @@ function renderTodos() {
         checkbox.checked = todo.completed;
         checkbox.addEventListener('change', () => toggleTodo(index));
         
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'todo-content';
+        
         const span = document.createElement('span');
         span.className = 'todo-text';
         span.textContent = todo.text;
         span.id = `todo-text-${index}`;
+        
+        const timeSpan = document.createElement('span');
+        timeSpan.className = 'todo-time';
+        timeSpan.textContent = formatTimeAgo(todo.createdAt);
+        
+        contentDiv.appendChild(span);
+        contentDiv.appendChild(timeSpan);
         
         const actions = document.createElement('div');
         actions.className = 'todo-actions';
@@ -264,11 +282,49 @@ function renderTodos() {
         actions.appendChild(deleteBtn);
         
         li.appendChild(checkbox);
-        li.appendChild(span);
+        li.appendChild(contentDiv);
         li.appendChild(actions);
         
         todoList.appendChild(li);
     });
+}
+
+// Format timestamp to exact date and time
+function formatTimeAgo(timestamp) {
+    if (!timestamp) return 'Just added';
+    
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+    
+    // For very recent items (less than 1 minute), show relative time
+    if (diffInSeconds < 60) {
+        return 'Just now';
+    }
+    
+    // For items less than 1 hour, show "X minutes ago"
+    if (diffInSeconds < 3600) {
+        const minutes = Math.floor(diffInSeconds / 60);
+        return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+    }
+    
+    // For items less than 24 hours, show "X hours ago"
+    if (diffInSeconds < 86400) {
+        const hours = Math.floor(diffInSeconds / 3600);
+        return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+    }
+    
+    // For older items, show full date and time
+    const options = {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    };
+    
+    return date.toLocaleDateString('en-US', options).replace(',', ' at');
 }
 
 // Add new todo with duplicate prevention
