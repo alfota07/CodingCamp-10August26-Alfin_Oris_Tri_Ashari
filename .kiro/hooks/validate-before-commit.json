@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Validate Code Before Commit",
+      "trigger": "PreTaskExec",
+      "description": "Validates that only one CSS and one JS file exists before allowing commits",
+      "action": {
+        "type": "command",
+        "command": "powershell -Command \"$cssFiles = (Get-ChildItem -Path css -Filter *.css -File).Count; $jsFiles = (Get-ChildItem -Path js -Filter *.js -File).Count; if ($cssFiles -ne 1 -or $jsFiles -ne 1) { Write-Error 'Error: Must have exactly 1 CSS file and 1 JS file'; exit 2 } else { Write-Output 'Validation passed: File structure is correct'; exit 0 }\"",
+        "timeout": 30
+      }
+    }
+  ]
+}

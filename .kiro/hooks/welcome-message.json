@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Welcome Message",
+      "trigger": "SessionStart",
+      "description": "Displays project information when starting a new session",
+      "action": {
+        "type": "agent",
+        "prompt": "Welcome to the Personal Dashboard project! This is a vanilla JavaScript web application with:\n- Light/Dark mode toggle\n- Customizable Pomodoro timer\n- Task management with sorting\n- Quick links manager\n- Beautiful animations\n\nRemember:\n- Only 1 CSS file in css/ directory\n- Only 1 JS file in js/ directory\n- Use vanilla JavaScript only (no frameworks)\n- All data stored in LocalStorage\n\nProject follows coding standards in .kiro/steering/coding-standards.md"
+      }
+    }
+  ]
+}

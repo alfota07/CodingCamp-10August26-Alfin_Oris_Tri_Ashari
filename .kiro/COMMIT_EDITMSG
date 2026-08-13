@@ -1,0 +1,20 @@
+feat: Add comprehensive project documentation and features
+
+New Features:
+- Task timestamps with exact date/time display
+- Animations for adding/removing tasks and links
+- Digital font (Orbitron) for clock and timer displays
+
+Documentation Added:
+- README.md with complete project documentation
+- .kiro/steering/project-overview.md (project information)
+- .kiro/steering/coding-standards.md (development guidelines)
+- .kiro/hooks/validate-before-commit.json (validation hook)
+- .kiro/hooks/welcome-message.json (session start hook)
+- .gitignore for proper git configuration
+
+Updates:
+- Enhanced task management with timestamps
+- Improved animations and user experience
+- Better code organization following best practices
+- Complete submission-ready documentation
